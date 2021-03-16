@@ -1,11 +1,11 @@
 <template>
 	<!-- Slider main container -->
 	<div class="section">
-		<SwiperContainer :books="books"></SwiperContainer>
+		<SwiperContainer @urlChange="updateDetail" :books="books"></SwiperContainer>
 	</div>
 	<div class="section">
 		<!-- BookDetail -->
-		<router-view/>
+		<router-view :changedUrl=updateUrl></router-view>
 	</div>
 </template>
 
@@ -18,7 +18,8 @@
 		},
 		data(){
 			return{
-				books:[]	// [{id,name,image}]
+				books:[],	// [{id,name,image}]
+				updateUrl:""
 			}
 		},
 		methods:{
@@ -27,7 +28,12 @@
 				return await fetch("https://fe-interview-api.unnotech.com/books")
 					.then((response) => response.json())
 					.then((json) => json)
+			},
+			updateDetail(index){
+				console.log(index+1)
+				this.updateUrl = index+1;
 			}
+
 		},
 		// created時執行
 		async created(){

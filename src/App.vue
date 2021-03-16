@@ -2,9 +2,6 @@
   <div id="nav">
     <!-- router-link 在經過編譯後會變成 <a> 標籤 -->
     <!-- 使用 to 屬性來處理目標 URL -->
-    <router-link to="/books">Books</router-link>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
   </div>
   <!-- 渲染 route 的位置 -->
   <router-view/>

@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
 import Books from '../views/Books.vue'
 import BookDetail from '../components/BookDetail.vue'
 const routes = [
@@ -12,14 +11,12 @@ const routes = [
         // 當 /books/:bookId 匹配成功,
         // BookDetail 會被渲染在 Books 的 <router-view> 中
         path: ':bookId',
-        component: BookDetail
+        component: BookDetail,
+        props:{
+          default: true
+        }
       }
     ]
-  },
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
   },
   {
     path: '/about',
