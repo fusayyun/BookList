@@ -1,8 +1,4 @@
 <template>
-  <div id="nav">
-    <!-- router-link 在經過編譯後會變成 <a> 標籤 -->
-    <!-- 使用 to 屬性來處理目標 URL -->
-  </div>
   <!-- 渲染 route 的位置 -->
   <router-view/>
 </template>
@@ -16,16 +12,4 @@
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>

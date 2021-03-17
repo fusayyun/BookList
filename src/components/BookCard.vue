@@ -1,13 +1,13 @@
 <template>
 		<div>
-<!-- 			<router-link :to="/books/+id" class="waves-effect  "> -->
+			<!-- 圖片 -->
 			<div class="card-image">
 				<img :src="image" width="200" height="260">
 			</div>
+			<!-- 書名 -->
 			<div class="card-content">
 				<span class="card-title">{{name}}</span>
 			</div>						
-			<!-- </router-link> -->
 		</div>
 </template>
 <script>
@@ -17,6 +17,7 @@
 
 			}
 		},
+		// 承襲自上層SwiperContainer
 		props:["id","image","name"],
 	}
 </script>

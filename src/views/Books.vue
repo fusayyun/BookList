@@ -1,7 +1,7 @@
 <template>
 	<!-- Slider main container -->
 	<div class="section">
-		<!-- Book List -->
+		<!-- Book List，取得值才載入 -->
 		<SwiperContainer v-if="books.length" :books="books"></SwiperContainer>
 	</div>
 	<div class="section">

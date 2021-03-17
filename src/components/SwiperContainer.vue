@@ -25,13 +25,12 @@
 		:mousewheel=true
 		direction= "vertical"
 		:centeredSlides=true
-		:initialSlide="3"
+		:initialSlide=initialSlideNum
 		:slides-per-view="1"
 		:slideToClickedSlide=true
 		navigation
 		:pagination="{ clickable:true }"
 		@slideChange="onSlideChange"
-		@activeIndexChange="onActiveIndexChange"
 	>
 		<!-- 子元件 -->
 		<swiper-slide  class="swiperH" :key="index" v-for="(book, index) in books" :data-history="book.id"
@@ -62,6 +61,11 @@
 	SwiperCore.use([Navigation, Pagination, Mousewheel]);
 
 	export default {
+		data(){
+			return{
+				initialSlideNum:3	//初始slide的index設定
+			}
+		},
 		components: {
 			BookCard,
 			Swiper,
@@ -69,41 +73,32 @@
 		},
 		// 承襲自Books的陣列
 		props:["books"],
-
+		computed: {
+			// 取得網址bookId
+			bookId(){	
+				return this.$route.params.bookId;
+			}
+		},
 		methods: {
 			//偵測到slide變化
 			onSlideChange(swiper) {
-				//this.activeId = swiper.activeIndex
-				// console.log(this.$props.books[swiper.activeIndex]);
-				// // let acitveBook = this.$props.books[swiper.activeIndex];
-				// //this.activeId = acitveBook.id
-				// console.log(this.books);
-				// this.$emit("urlChange",swiper.activeIndex)
-
-				//console.log(swiper.slides)
-				// for (let slide in swiper.slides){
-				// 	//slide.style.background="yellow"
-				// }
-				//console.log(swiper.slides.length)
-				//https://stackoverflow.com/questions/32945099/how-to-detect-current-slide-in-swiper-js
-				//let index_currentSlide = swiper.realIndex;
-				//let currentSlide = swiper.slides[index_currentSlide];
-				//console.log(currentSlide.className)
-				//currentSlide.className +=" "+"orange accent-1";
-				// //this.activeIndex = index_currentSlide
+				// 取得active slide的"data-history"屬性
 				var url = swiper.$wrapperEl.children('.swiper-slide').eq(swiper.activeIndex).attr('data-history');
+				//更新網址
 				this.$router.push('/books/'+url)
 			},
-			// slideChangeEnd(){
-			// 	let currentPage = window.location.href.split('books/')[1];
-			// 	console.log("Changed?",window.location.href)
-								
-			// 	//this.activeId
-			// }
+		},
+		created(){
+			//如果網址指定bookId，更改initialSlide
+			console.log('載入')
+			if(this.bookId){
+				this.initialSlideNum = this.bookId-1;
+			}		
 		},
 	}
 </script>
 <style type="text/css">
+	/*mask設定*/
 	.mask{
 		background: #fff;
     -webkit-transition: opacity .2s;
@@ -116,16 +111,10 @@
     left: 0;
     display: block;
 	}
-	.swiper-slide-active{
-		-webkit-transition: -webkit-box-shadow .25s;
-    transition: -webkit-box-shadow .25s;
-    transition: box-shadow .25s;
-    transition: box-shadow .25s, -webkit-box-shadow .25s;
-		background: #fff;
-	}
+	/*active sslide的mask設定*/
 	.swiper-slide-active .mask{
 		opacity: 0;
-	}
+	}	
 	.swiper-slide {
 		text-align: center;
 		font-size: 18px;
@@ -144,6 +133,7 @@
 		-webkit-align-items: center;
 		align-items: center;
 	}
+	/*響應式調整*/
 	@media (max-width: 760px) {
 		.swiper-button-next {
 			right: 20px;

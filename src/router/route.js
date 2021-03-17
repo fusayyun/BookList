@@ -9,12 +9,9 @@ const routes = [
     children: [
       {
         // 當 /books/:bookId 匹配成功,
-        // BookDetail 會被渲染在 Books 的 <router-view> 中
+        // BookDetail 會被渲染在 Books中 的 <router-view> 中
         path: ':bookId',
         component: BookDetail,
-        props:{
-          default: true
-        }
       }
     ]
   }
