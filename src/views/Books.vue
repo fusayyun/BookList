@@ -1,11 +1,12 @@
 <template>
 	<!-- Slider main container -->
 	<div class="section">
-		<SwiperContainer @urlChange="updateDetail" :books="books"></SwiperContainer>
+		<!-- Book List -->
+		<SwiperContainer v-if="books.length" :books="books"></SwiperContainer>
 	</div>
 	<div class="section">
 		<!-- BookDetail -->
-		<router-view :changedUrl=updateUrl></router-view>
+		<router-view/>
 	</div>
 </template>
 
@@ -19,7 +20,6 @@
 		data(){
 			return{
 				books:[],	// [{id,name,image}]
-				updateUrl:""
 			}
 		},
 		methods:{
@@ -29,16 +29,12 @@
 					.then((response) => response.json())
 					.then((json) => json)
 			},
-			updateDetail(index){
-				console.log(index+1)
-				this.updateUrl = index+1;
-			}
 
 		},
 		// created時執行
 		async created(){
 			this.books = await this.fetchBooks()
-			console.log(this.book) 
+			console.log("hello?") 
 		}
 
 	}

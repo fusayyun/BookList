@@ -1,31 +1,19 @@
 <template>
 	<!--
-		:history="{key:'' }": 需搭配swiper-slide上設定屬性"data-history"=指定路由
-		:initialSlide: 載入初始slide
-		:slides-per-view: 顯示幾張
-		:direction: 方向
-		:breakpoints: 根據大小調整，數字以上
-		:space-between: slide之間距離
-		:centeredSlides: active slide置中嗎?
-		:slideToClickedSlide: 跳轉到點選的slide
-		:observeParents: 監測swiper
-		navigation: 監測swiper並自動更新
-		:pagination: 頁數控制
-		:effect //效果
-		@swiper="onSwiper"
-		@slideChange="onSlideChange"
-		@activeIndexChange="activeIndexChange"
-		@init="onSizeDetection"
-		@swiper:取得swiper實體
-
-		-間隔
+		:breakpoints: 設定調整響應式的斷點
+		:runCallbacksOnInit: 是否在載入時觸發slideChange等事件
+		:mousewheel: 是否啟動滑鼠滾動
+		direction: 滑動方向 "vertical" or "horizontal"
+		:centeredSlides: active slide是否置中
+		:initialSlide: 初始slide的index
+		:slides-per-view: 一次顯示幾張
+		:slideToClickedSlide: 是否移動到點擊的slide
+		navigation: 導航按鈕模組
+		:pagination: 分頁模組設定
+		@slideChange="onSlideChange": slideChange事件
 	-->
 	<swiper
-		:history="{key:'books' }"
 		class="section swiperH"
-		:mousewheel=true
-		direction= "vertical"
-		:initialSlide="1"
 		:breakpoints="{
 			760:{
 				direction:'horizontal',
@@ -33,33 +21,27 @@
 				spaceBetween:30,
 			}
 		}"
-		:slides-per-view="1"
+		:runCallbacksOnInit=false
+		:mousewheel=true
+		direction= "vertical"
 		:centeredSlides=true
+		:initialSlide="3"
+		:slides-per-view="1"
 		:slideToClickedSlide=true
-		:observer=true
-		:observeParents=true
 		navigation
 		:pagination="{ clickable:true }"
-		:effect="coverflow"
-		:coverflowEffect="{
-			slideShadows : true,
-			rotate: 30,
-			stretch: 10,
-			depth: 100,
-			modifier: 3,		
-		}"
-		@swiper="onSwiper"
 		@slideChange="onSlideChange"
-		@transitionEnd="slideChangeEnd"
-		@activeIndexChange="activeIndexChange"
-		@init="onSizeDetection"
+		@activeIndexChange="onActiveIndexChange"
 	>
 		<!-- 子元件 -->
 		<swiper-slide  class="swiperH" :key="index" v-for="(book, index) in books" :data-history="book.id"
 		>
+			<!-- BookCard元件載入點 -->
 			<BookCard				
 				v-bind="book">
-			</BookCard>				
+			</BookCard>
+			<!-- 遮罩 -->
+			<span class="mask" style="user-select: auto;"></span>				
 		</swiper-slide>
 	</swiper>
 </template>
@@ -68,8 +50,7 @@
 	import BookCard from './BookCard.vue'	
 	
 	// import Swiper core and required modules
-	import SwiperCore, { Navigation, Pagination, History, EffectCoverflow,
- Mousewheel } from 'swiper';
+	import SwiperCore, { Navigation, Pagination, Mousewheel } from 'swiper';
 	
 	// Import Swiper Vue.js components
 	import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -78,16 +59,9 @@
 	import 'swiper/swiper-bundle.min.css';
 	
 	// install Swiper modules
-	SwiperCore.use([Navigation, Pagination, History, EffectCoverflow, 
-Mousewheel]);
+	SwiperCore.use([Navigation, Pagination, Mousewheel]);
 
 	export default {
-		data(){
-			return{
-				activeId : 0,
-				getbooks: this.books
-			}
-		},
 		components: {
 			BookCard,
 			Swiper,
@@ -97,19 +71,14 @@ Mousewheel]);
 		props:["books"],
 
 		methods: {
-			//取得swipe本身
-			onSwiper(swiper) {
-				console.log(swiper);
-			},
-			//偵測到變化
+			//偵測到slide變化
 			onSlideChange(swiper) {
 				//this.activeId = swiper.activeIndex
-				// console.log(swiper.activeIndex);
 				// console.log(this.$props.books[swiper.activeIndex]);
 				// // let acitveBook = this.$props.books[swiper.activeIndex];
 				// //this.activeId = acitveBook.id
 				// console.log(this.books);
-				this.$emit("urlChange",swiper.activeIndex)
+				// this.$emit("urlChange",swiper.activeIndex)
 
 				//console.log(swiper.slides)
 				// for (let slide in swiper.slides){
@@ -122,26 +91,44 @@ Mousewheel]);
 				//console.log(currentSlide.className)
 				//currentSlide.className +=" "+"orange accent-1";
 				// //this.activeIndex = index_currentSlide
-				// var url = swiper.$wrapperEl.children('.swiper-slide').eq(swiper.activeIndex);
-				// console.log("what",url)
+				var url = swiper.$wrapperEl.children('.swiper-slide').eq(swiper.activeIndex).attr('data-history');
+				this.$router.push('/books/'+url)
 			},
 			// slideChangeEnd(){
 			// 	let currentPage = window.location.href.split('books/')[1];
 			// 	console.log("Changed?",window.location.href)
 								
 			// 	//this.activeId
-			// 	//this.$router.push({ name:'Books', params:{currentPage}})
 			// }
 		},
-
-
 	}
 </script>
 <style type="text/css">
+	.mask{
+		background: #fff;
+    -webkit-transition: opacity .2s;
+    transition: opacity .2s;
+    opacity: .8;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+	}
+	.swiper-slide-active{
+		-webkit-transition: -webkit-box-shadow .25s;
+    transition: -webkit-box-shadow .25s;
+    transition: box-shadow .25s;
+    transition: box-shadow .25s, -webkit-box-shadow .25s;
+		background: #fff;
+	}
+	.swiper-slide-active .mask{
+		opacity: 0;
+	}
 	.swiper-slide {
 		text-align: center;
 		font-size: 18px;
-		background: #fff;
 		height: 100%;
 		/* Center slide text vertically */
 		display: -webkit-box;
@@ -167,6 +154,7 @@ Mousewheel]);
 			left: 20px;
 			transform: rotate(90deg);
 		}
+		/*調整container和slide的高度*/
 		.swiperH{
 			height: 400px;
 		}

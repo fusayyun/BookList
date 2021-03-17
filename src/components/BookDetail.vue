@@ -3,12 +3,15 @@
 	<form @submit.prevent="onSubmit">
 		<div class="section">
 			<div class="row">
-				<div class="col l2 s12"><h4>價格</h4></div>
+				<div class="col l2 s12">
+					<h4>價格</h4>
+				</div>
 				<div class="col l2 s2 input-field">
+					<!-- price值大於1才可做減法 -->
 					<button class="btn" @click="book.price > 1 ? book.price-- : ''">-</button>
 				</div>
 				<div class="col l4 s8 input-field">
-					<input type="number" name="price" v-model.number="book.price" min="1">
+					<input class="center input-text" type="number" name="price" v-model.number="book.price" min="1">
 				</div>
 				<div class="col l2 s2 input-field">
 					<button type="button" class="btn" @click="book.price++">+</button>
@@ -19,10 +22,11 @@
 					<h4>數量</h4>	
 				</div>
 				<div class="col l2 s2 input-field">
+					<!-- count值大於1才可做減法 -->
 					<button type="button" class="btn" @click="book.count > 1 ? book.count-- : ''">-</button>
 				</div>
 				<div class="col l4 s8 input-field">
-					<input type="number" name="count" v-model.number="book.count" min="1">
+					<input type="number" name="count" class="center input-text" v-model.number="book.count" min="1">
 				</div>
 				<div class="col l2 s2 input-field">
 					<button type="button" class="btn" @click="book.count++">+</button>
@@ -37,7 +41,6 @@
 	export default{
 		data() {
 			return {
-				route:window.location.href.split('books/')[1],
 				book: {
 					id: '1',
 					price: 1,
@@ -45,7 +48,6 @@
 				},
 			}
 		},
-		props:["changedUrl"],
 		computed: {
 			// 取得bookId
 			bookId(){	
@@ -57,12 +59,6 @@
 		watch:{
 			// 監聽網址變化
 			bookId: async function(val){ 
-				console.log('??');
-				this.book = await this.fetchBookDetail(val);
-			},
-			changedUrl: async function(val){
-				//let page = window.location.href.split('books/')[1];
-				console.log("?")
 				this.book = await this.fetchBookDetail(val);
 			}
 		},
@@ -99,3 +95,8 @@
 	};
 	
 </script>
+<style type="text/css">
+	.input-text{
+		font-size: 1.64rem!important; 
+	}
+</style>
