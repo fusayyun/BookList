@@ -1,12 +1,11 @@
-# Books
-https://github.com/UnnotechSoftware/unnotech-frontend-recruit
+# [Books](https://github.com/UnnotechSoftware/unnotech-frontend-recruit)
 
 ## Project 執行頁面
 
 https://fusayyun.github.io/books/ 
 
 
-### 檔案架構
+## 檔案架構
 
 ```
 books
@@ -31,7 +30,7 @@ books
 └── vue.config.js               # Vue CLI 配置檔案
 ```
 
-### Vue元件架構
+## Vue元件架構
 
 ```
 App                               #根元件
@@ -41,7 +40,7 @@ App                               #根元件
     └──BookDetail(/books/:id)     #頁面下半部中展示Books Detail的元件
 ```
 
-### 第三方 library
+## 第三方 library
 - Swiper Vue.js Components：
 
   幻燈片套件
@@ -55,7 +54,7 @@ App                               #根元件
   基於Material Design的CSS framework
   方便快速
 
-### 困難、問題，以及解決的方法
+## 困難、問題，以及解決的方法
 #### 問題1: Book List在切換成小尺寸頁面時版面跑掉
 本來是照Demo的來實作   
 後來發現設定內建屬性breakpoints更簡潔靈活   
