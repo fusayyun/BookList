@@ -2,7 +2,7 @@
 	<!-- Slider main container -->
 	<div class="section">
 		<!-- Book List，取得值才載入 -->
-		<SwiperContainer v-if="books.length" :books="books"></SwiperContainer>
+		<BookList v-if="books.length" :books="books"></BookList>
 	</div>
 	<div class="section">
 		<!-- BookDetail -->
@@ -11,11 +11,11 @@
 </template>
 
 <script>
-	import SwiperContainer from '../components/SwiperContainer.vue';
+	import BookList from '../components/BookList.vue';
 
 	export default{
 		components:{
-			SwiperContainer
+			BookList
 		},
 		data(){
 			return{

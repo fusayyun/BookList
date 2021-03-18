@@ -17,7 +17,7 @@
 
 			}
 		},
-		// 承襲自上層SwiperContainer
+		// 承襲自上層BookList
 		props:["id","image","name"],
 	}
 </script>

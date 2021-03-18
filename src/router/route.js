@@ -3,7 +3,8 @@ import Books from '../views/Books.vue'
 import BookDetail from '../components/BookDetail.vue'
 const routes = [
   {
-    path: '/books',
+    //因為githubPage無法支持history
+    path: '/',
     name: 'Books',
     component: Books,
     children: [

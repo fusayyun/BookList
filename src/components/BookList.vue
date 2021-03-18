@@ -35,10 +35,10 @@
 		<!-- 子元件 -->
 		<swiper-slide  class="swiperH" :key="index" v-for="(book, index) in books" :data-history="book.id"
 		>
-			<!-- BookCard元件載入點 -->
-			<BookCard				
+			<!-- BookListCard元件載入點 -->
+			<BookListCard				
 				v-bind="book">
-			</BookCard>
+			</BookListCard>
 			<!-- 遮罩 -->
 			<span class="mask" style="user-select: auto;"></span>				
 		</swiper-slide>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-	import BookCard from './BookCard.vue'	
+	import BookListCard from './BookListCard.vue'	
 	
 	// import Swiper core and required modules
 	import SwiperCore, { Navigation, Pagination, Mousewheel } from 'swiper';
@@ -67,7 +67,7 @@
 			}
 		},
 		components: {
-			BookCard,
+			BookListCard,
 			Swiper,
 			SwiperSlide,
 		},
@@ -85,7 +85,7 @@
 				// 取得active slide的"data-history"屬性
 				var url = swiper.$wrapperEl.children('.swiper-slide').eq(swiper.activeIndex).attr('data-history');
 				//更新網址
-				this.$router.push('/books/'+url)
+				this.$router.push('/'+url)
 			},
 		},
 		created(){
