@@ -38,7 +38,7 @@ App                               #根元件
 └── Books(/books)                 #整合元件
     ├──BookList                   #頁面上半部中展示書本的Books List元件
     |  └──BookListCard            #Book List中的Card元件
-    └──BookDetail(/books/:id)     #頁面下半部中展示書本的Books Detail元件
+    └──BookDetail(/books/:id)     #頁面下半部中展示Books Detail的元件
 ```
 
 ### 第三方 library
