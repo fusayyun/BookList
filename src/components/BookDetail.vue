@@ -65,13 +65,13 @@
 		methods:{
 			// 下載請求
 			async fetchBookDetail(id){
-				return await fetch("https://fe-interview-api.unnotech.com/profile/"+id)
+				return await fetch("https://bookslist-api.herokuapp.com/profile/"+id)
 					.then((response) => response.json())
 					.then((json) => json)
 			},
 			// 上傳請求
 			async postBookDetail(id,data){
-				return await fetch("https://fe-interview-api.unnotech.com/profile/"+id,{
+				return await fetch("https://bookslist-api.herokuapp.com/profile/"+id,{
 					method: 'PATCH',
 					// header外參數 cache mode redirect referrer
 					headers: {

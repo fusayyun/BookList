@@ -25,7 +25,7 @@
 		methods:{
 			// 取得書籍資料
 			async fetchBooks(){
-				return await fetch("https://fe-interview-api.unnotech.com/books")
+				return await fetch("https://bookslist-api.herokuapp.com/books/")
 					.then((response) => response.json())
 					.then((json) => json)
 			},
