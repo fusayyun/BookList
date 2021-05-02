@@ -1,9 +1,19 @@
-# [Books](https://github.com/UnnotechSoftware/unnotech-frontend-recruit)
+# Books
+<!-- [Books](https://github.com/UnnotechSoftware/unnotech-frontend-recruit) -->
 
 ## Project 執行頁面
 
 [Demo](https://fusayyun.github.io/books/)
 
+## 特點
+- 連結api來取得書本資訊
+- 左右滑動書本切換下方書本資訊
+- RWD：手機版本轉為上下滑動
+
+## Api
+
+[Github](https://github.com/fusayyun/books_api)
+[api](https://bookslist-api.herokuapp.com)
 
 ## 檔案架構
 
@@ -63,3 +73,6 @@ App                               #根元件
 #### 問題2: Book List卡片切換對應到Book Deatail資料時一直無法同步   
 發現是swiper內建的history導航和vue router並不相通，   
 棄用swiper的history改成卡片切換時觸發vue router的router.push。
+
+### 問題3: 資料還未擷取到使得swiper運作不正常
+使用v-if等到資料載入後再顯示swiper

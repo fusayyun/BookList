@@ -34,7 +34,7 @@
 		// created時執行
 		async created(){
 			this.books = await this.fetchBooks()
-			console.log("hello?") 
+			console.log("this.books",this.books) 
 		}
 
 	}

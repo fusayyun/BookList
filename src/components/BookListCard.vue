@@ -18,6 +18,6 @@
 			}
 		},
 		// 承襲自上層BookList
-		props:["id","image","name"],
+		props:["profile","image","name"],
 	}
 </script>

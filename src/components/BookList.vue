@@ -33,7 +33,7 @@
 		@slideChange="onSlideChange"
 	>
 		<!-- 子元件 -->
-		<swiper-slide  class="swiperH" :key="index" v-for="(book, index) in books" :data-history="book.id"
+		<swiper-slide  class="swiperH" :key="index" v-for="(book, index) in books" :data-history="book.profile"
 		>
 			<!-- BookListCard元件載入點 -->
 			<BookListCard				
